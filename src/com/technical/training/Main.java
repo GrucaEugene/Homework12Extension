@@ -17,9 +17,10 @@ import java.util.Scanner;
 
 class ArrayPrinter {
 
-    public void print(int[] array) {
+    public void print(int[] array, int index) {
         System.out.println("-----------Whole printed array------------");
         System.out.println(Arrays.toString(array));
+        printElem(array, index);
     }
 
     protected void printElem(int[] array, int index) {
@@ -31,7 +32,7 @@ class SamsungArrayPrinter extends ArrayPrinter {
     @Override
     protected void printElem(int[] array, int index) {
         System.out.println("------------Samsung Inc.--------------");
-        System.out.println("Printed array element: " + array[index]);
+        System.out.println("Printed (index: "+index+") array element: " + array[index]);
         System.out.println("-------- All rights reserved----------");
 
     }
@@ -42,7 +43,7 @@ class CanonArrayPrinter extends ArrayPrinter {
     @Override
     protected void printElem(int[] array, int index) {
         System.out.println("--------------Canon Inc.--------------");
-        System.out.println("Printed array element: " + array[index]);
+        System.out.println("Printed (index: "+index+") array element: " + array[index]);
         System.out.println("-------- All rights reserved----------");
 
     }
@@ -53,7 +54,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        ArrayPrinter arrayPrinter;
+        ArrayPrinter arrayPrinter = null;
 
         int[] arr1 = {12, 32, 34, 54, 56, 67, 87, 98, 99, 84, 34};
         int[] arr2 = {21, 23, 43, 45, 65, 76, 78, 89, 55, 48, 43};
@@ -71,29 +72,15 @@ public class Main {
             choice = sc.nextInt();
 
             switch (choice) {
-                case 1 -> {
-                    arrayPrinter = new SamsungArrayPrinter();
-                    arrayPrinter.print(arr1);
-                    arrayPrinter.print(arr1);
-                    arrayPrinter.print(arr1);
-                    arrayPrinter.printElem(arr1, 1);
-                    arrayPrinter.printElem(arr2, 2);
-                    arrayPrinter.printElem(arr3, 3);
-                }
-
-                case 2 -> {
-                    arrayPrinter = new CanonArrayPrinter();
-                    arrayPrinter.print(arr1);
-                    arrayPrinter.print(arr1);
-                    arrayPrinter.print(arr1);
-                    arrayPrinter.printElem(arr1, 1);
-                    arrayPrinter.printElem(arr2, 2);
-                    arrayPrinter.printElem(arr3, 3);
-                }
+                case 1 -> arrayPrinter = new SamsungArrayPrinter();
+                case 2 -> arrayPrinter = new CanonArrayPrinter();
                 default -> System.out.println("Error, try again");
             }
-
         } while (choice != 1 && choice != 2);
+
+        arrayPrinter.print(arr1,1);
+        arrayPrinter.print(arr2, 2);
+        arrayPrinter.print(arr3, 3);
 
 
     }
